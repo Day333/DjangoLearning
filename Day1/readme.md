@@ -1,4 +1,3 @@
-相关代码地址：[https://github.com/Day333/DjangoLearning](https://github.com/Day333/DjangoLearning)
 # Day1
 ## 1 创建环境
 首先，创建虚拟环境。
