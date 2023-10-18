@@ -1,4 +1,4 @@
-# Day1
+# Task 1
 ## 1 创建环境
 首先，创建虚拟环境。
 > conda create -n Django python=3.8
