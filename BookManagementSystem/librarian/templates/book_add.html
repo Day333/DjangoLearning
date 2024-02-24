@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card gradient-forest">
+                        <div class="card-body  p-5">
+                            <div class="card-title text-primary"><h4 style="text-align: center;color:white">添加图书</h4>
+                            </div>
+                            <hr>
+                            <form action="{% url "librarian:add_book" %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="input-17"
+                                           style="color: white">图书名称</label>
+                                    <input type="text" required
+                                           class="form-control single-select select2-hidden-accessible" id="input-17"
+                                           name="book_name" placeholder="请输入图书名">
+                                </div>
+                              <div class="form-group">
+                                    <label for="input-17"
+                                           style="color: white">作者</label>
+                                    <input type="text" required
+                                           class="form-control single-select select2-hidden-accessible" id="input-17"
+                                           name="author" placeholder="请输入作者">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-18"
+                                           style="color: white">图书类型</label>
+                                    <input type="text" required
+                                           class="form-control single-select select2-hidden-accessible" id="input-18"
+                                           name="book_type" placeholder="请输入图书类型">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-19"
+                                           style="color: white">图书价格</label>
+                                    <input type="text" required
+                                           class="form-control single-select select2-hidden-accessible" id="input-19"
+                                           name="book_price" placeholder="请输入图书价格">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书评分</label>
+                                    <input type="text" required
+                                           class="form-control single-select select2-hidden-accessible"
+                                           name="book_score" id="input-20" placeholder="请输入图书库存">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书销量</label>
+                                    <input type="number" required
+                                           class="form-control single-select select2-hidden-accessible"
+                                           name="book_sales" id="input-20" placeholder="请输入图书销量">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书评论量</label>
+                                    <input type="number" required
+                                           class="form-control single-select select2-hidden-accessible"
+                                           name="comment_nums" id="input-20" placeholder="请输入图书评论量">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书库存</label>
+                                    <input type="number" required
+                                           class="form-control single-select select2-hidden-accessible"
+                                           name="book_inventory" id="input-20" placeholder="请输入图书库存">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书简介</label>
+                                    <textarea required class="form-control single-select select2-hidden-accessible"
+                                              id="input-20" name="book_description" placeholder="请输入图书简介"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书图片</label>
+                                    <input type="file" required
+                                           class="form-control single-select select2-hidden-accessible"
+                                           name="book_image" id="input-20" value="选择文件">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20"
+                                           style="color: white">图书出版社</label>
+                                    <select name="publisher" required
+                                            class="form-control single-select select2-hidden-accessible"
+                                            id="input-20">
+                                        {% for publisher in publisher_list %}
+                                            <option value="{{ publisher.id }}">{{ publisher.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <br>
+                                <br>
+
+                                <div class="modal fade" id="modal-animation-14">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeInUp">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">确认弹框</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>你确定要保存数据吗？
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal"><i
+                                                        class="fa fa-times"></i> 关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="fa fa-check-square-o"></i> 保存
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-light m-1"
+                                        data-toggle="modal" data-target="#modal-animation-14"><i
+                                        class="zmdi zmdi-check-circle"></i>提交
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div><!--End Row-->
+            </div>
+            <!-- End container-fluid-->
+
+        </div>
+
+{% endblock %}

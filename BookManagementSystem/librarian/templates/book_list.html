@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card gradient-forest">
+                        <div class="card gradient-forest"><h4 style="color: white">图书列表</h4></div>
+                        <div class="card-body text-center p-5">
+                            <div class="table-responsive">
+                                <div id="default-datatable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-dark table-striped shadow-dark"
+                                                   role="grid" aria-describedby="default-datatable_info">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>图书编号</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书名称</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书图片</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书类型</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>作者</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书价格</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书评分</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 101px;font-size:17px"><p>图书简介</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书销量</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书评论量</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书库存</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>出版社</p>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Age: activate to sort column ascending"
+                                                        style="width: 100px;font-size:17px"><p>图书操作</p>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for book_obj in book_page_objs %}
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1"
+                                                            style="width: 50px">{{ book_obj.book_num }}</td>
+                                                        <td>{{ book_obj.book_name }}</td>
+                                                        <!-- 使用弹框来显示图书的详情-->
+                                                        <td>
+                                                            <a href="{% static book_obj.image_set.first.img_address.name %}"
+                                                               data-fancybox="group2"
+                                                               data-caption="{{ book_obj.book_name }}">
+                                                                <img src="{% static book_obj.image_set.first.img_address.name %}"
+                                                                     alt="lightbox"
+                                                                     class="lightbox-thumb img-thumbnail">
+                                                            </a>
+
+
+                                                        </td>
+                                                        <td>{{ book_obj.book_type }}</td>
+                                                        <td>{{ book_obj.author }}</td>
+                                                        <td>{{ book_obj.book_price }}</td>
+                                                        <td>{{ book_obj.book_score }}</td>
+                                                        <td style="width: 100px">
+                                                            <div style="width:100px;overflow: hidden;text-overflow: ellipsis">{{ book_obj.book_description }}</div>
+                                                        </td>
+                                                        <td>{{ book_obj.book_sales }}</td>
+                                                        <td>{{ book_obj.comment_nums }}</td>
+                                                        <td>{{ book_obj.book_inventory }}</td>
+                                                        <td>{{ book_obj.publisher.name }}</td>
+                                                        <td>
+                                                            <a href="/librarian/update_book/?id={{ book_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                    修改
+                                                                </button>
+                                                            </a>
+                                                            <a href="/librarian/delete_book/?id={{ book_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                        data-toggle="modal"
+                                                                        data-target="#modal-animation-11">删除
+                                                                </button>
+                                                            </a>
+                                                        </td>
+
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-7" style="margin: 1px 300px">
+                                        <div class="dataTables_paginate paging_simple_numbers"
+                                             id="default-datatable_paginate">
+
+                                            <ul class="pagination pagination-outline-dark">
+
+                                                {% if book_page_objs.has_previous %}
+                                                    <li class="paginate_button page-item previous "
+                                                        id="default-datatable_previous">
+                                                        <a href='{% url 'librarian:book_list' page=book_page_objs.previous_page_number %}'
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="0" tabindex="0"
+                                                           class="page-link">上一页</a></li>
+
+                                                {% else %}
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="default-datatable_previous">
+                                                        <a href="{% url "librarian:book_list" page=1 %}"
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="0" tabindex="0"
+                                                           class="page-link">上一页</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% for foo in page_range %}
+                                                    {% if foo == current_page_num %}
+                                                        <!--                                        如果是当前页就高亮显示-->
+                                                        <li class="paginate_button page-item active"><a
+                                                                href="{% url "librarian:book_list" page=current_page_num %}"
+                                                                aria-controls="default-datatable"
+                                                                data-dt-idx="1"
+                                                                tabindex="0"
+                                                                class="page-link">{{ current_page_num }}</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <!--                                        如果不是当前页就正常显示-->
+                                                        <li class="paginate_button page-item"><a
+                                                                href="{% url "librarian:book_list" page=foo %}"
+                                                                aria-controls="default-datatable"
+                                                                data-dt-idx="1"
+                                                                tabindex="0"
+                                                                class="page-link">{{ foo }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if book_page_objs.has_next %}
+                                                    <li class="paginate_button page-item next"
+                                                        id="default-datatable_next">
+                                                        <a href="{% url "librarian:book_list" page=book_page_objs.next_page_number %}"
+
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="7" tabindex="0"
+                                                           class="page-link">下一页</a></li>
+                                                {% else %}
+                                                    <li class="paginate_button page-item next disabled"
+                                                        id="default-datatable_next"><a href="#"
+                                                                                       aria-controls="default-datatable"
+                                                                                       data-dt-idx="7" tabindex="0"
+                                                                                       class="page-link">下一页</a></li>
+                                                {% endif %}
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Row-->
+
+
+    </div>
+    <!-- End container-fluid--
+{% endblock %}

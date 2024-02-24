@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card gradient-forest">
+                        <div class="card gradient-forest"><h4 style="color: white">出版社列表</h4></div>
+                        <div class="card-body text-center p-5">
+                            <div class="table-responsive">
+                                <div id="default-datatable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-dark table-striped shadow-dark">
+                                            <thead>
+                                            <tr role="row" class="odd">
+                                                <th class="sorting_asc" tabindex="0"
+                                                    aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                    aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 140px;
+                                                    font-size:17px">
+                                                    <p>出版社id</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 225px;font-size:17px"><p>出版社</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 101px;font-size:17px"><p>出版社地址</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 26px;font-size:17px"><p>出版社操作</p>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for publisher_obj in publisher_page_objs %}
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1">{{ publisher_obj.id }}</td>
+                                                    <td>{{ publisher_obj.name }}</td>
+                                                    <td>{{ publisher_obj.address }}</td>
+                                                    <td>
+                                                        <a href="/librarian/update_publisher/?id={{ publisher_obj.id }}">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                修改
+                                                            </button>
+                                                        </a>
+                                                        <a href="/librarian/delete_publisher/?id={{ publisher_obj.id }}">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                    data-toggle="modal"
+                                                                    data-target="#modal-animation-11"
+                                                                    id="d1">删除
+                                                            </button>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-7" style="margin: 20px 400px">
+                                    <div class="dataTables_paginate paging_simple_numbers"
+                                         id="default-datatable_paginate">
+
+                                        <ul class="pagination pagination-outline-dark">
+
+                                            {% if publisher_page_objs.has_previous %}
+                                                <li class="paginate_button page-item previous "
+                                                    id="default-datatable_previous">
+                                                    <a href='{% url 'librarian:publisher_list' page=publisher_page_objs.previous_page_number %}'
+                                                       aria-controls="default-datatable"
+                                                       data-dt-idx="0" tabindex="0"
+                                                       class="page-link">上一页</a></li>
+
+                                            {% else %}
+                                                <li class="paginate_button page-item previous disabled"
+                                                    id="default-datatable_previous">
+                                                    <a href="{% url "librarian:publisher_list" page=1 %}"
+                                                       aria-controls="default-datatable"
+                                                       data-dt-idx="0" tabindex="0"
+                                                       class="page-link">上一页</a>
+                                                </li>
+                                            {% endif %}
+                                            {% for foo in page_range %}
+                                                {% if foo == current_page_num %}
+                                                    <!--                                        如果是当前页就高亮显示-->
+                                                    <li class="paginate_button page-item active"><a
+                                                            href="{% url "librarian:publisher_list" page=current_page_num %}"
+                                                            aria-controls="default-datatable"
+                                                            data-dt-idx="1"
+                                                            tabindex="0"
+                                                            class="page-link">{{ current_page_num }}</a>
+                                                    </li>
+                                                {% else %}
+                                                    <!--                                        如果不是当前页就正常显示-->
+                                                    <li class="paginate_button page-item"><a
+                                                            href="{% url "librarian:publisher_list" page=foo %}"
+                                                            aria-controls="default-datatable"
+                                                            data-dt-idx="1"
+                                                            tabindex="0"
+                                                            class="page-link">{{ foo }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if publisher_page_objs.has_next %}
+                                                <li class="paginate_button page-item next"
+                                                    id="default-datatable_next">
+                                                    <a href="{% url "librarian:publisher_list" page=publisher_page_objs.next_page_number %}"
+
+                                                       aria-controls="default-datatable"
+                                                       data-dt-idx="7" tabindex="0"
+                                                       class="page-link">下一页</a></li>
+                                            {% else %}
+                                                <li class="paginate_button page-item next disabled"
+                                                    id="default-datatable_next"><a href="#"
+                                                                                   aria-controls="default-datatable"
+                                                                                   data-dt-idx="7" tabindex="0"
+                                                                                   class="page-link">下一页</a></li>
+                                            {% endif %}
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End container-fluid-->
+{% endblock %}
+
